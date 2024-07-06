@@ -8,6 +8,8 @@ import HeartIcon from "@/assets/heartIcon";
 import BagIcon from "@/assets/bagIcon";
 import UserIcon from "@/assets/userIcon";
 import Slider from "@/components/slider";
+import MultiLevelDropdown from "@/components/commonComponents/MultiLevelDropdown";
+import {menuItems} from "@/assets/constant/categoryConstant";
 
 function Header() {
   return (
@@ -83,14 +85,17 @@ function Header() {
         </div>
       </div>
       <div className="flex justify-between w-full h-[70px] items-center bg-green-400">
-        <div className="w-70 px-10 ">dropdown</div>
+        <div className="w-70 px-10 ">
+          HELLO
+          <MultiLevelDropdown />
+        </div>
         <div className="w-30 px-10 ">
           <button className="p-3 w-[200px] rounded-md bg-orange-400 text-black">
             Seller Login
           </button>
         </div>
       </div>
-      <div className="h-[60%]" style={{backgroundImage: "url(/hero-bg.png)"}}>
+      <div style={{backgroundImage: "url(/hero-bg.png)"}}>
         <Slider />
       </div>
       {/* <ChatMessager/> */}

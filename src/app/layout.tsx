@@ -25,11 +25,11 @@ export default function RootLayout({
         {false ? (
           <div className="h-screen">{children}</div>
         ) : (
-          <div className="flex overflow-hidden">
+          <div className="flex">
             {/* <Sidebar /> */}
             <div className="w-full">
               <Header />
-              <div className="h-[85vh] w-full bg-white border rounded-lg p-5">
+              <div className="w-full bg-white border rounded-lg">
                 {children}
               </div>
             </div>

@@ -1,9 +1,10 @@
 /** @format */
 
-import React from 'react';
+import React from "react";
+import OurCategoryCard from "../../components/ourCategoryCard";
 
 function Dashboard() {
-	return <div>Dashboard</div>;
+  return <OurCategoryCard />;
 }
 
 export default Dashboard;

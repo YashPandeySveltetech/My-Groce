@@ -1,112 +1,68 @@
-// components/Slider.js
 "use client";
 
-import React, {useRef, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 
 const Slider = () => {
-  const carousel = useRef(null);
-  const intervalRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const startAutoScroll = () => {
-    intervalRef.current = setInterval(() => {
-      if (carousel.current) {
-        const maxScrollLeft =
-          carousel.current.scrollWidth - carousel.current.clientWidth;
-        if (carousel.current.scrollLeft >= maxScrollLeft) {
-          carousel.current.scrollTo({left: 0, behavior: "smooth"});
-        } else {
-          carousel.current.scrollTo({
-            left: carousel.current.scrollLeft + carousel.current.clientWidth,
-            behavior: "smooth",
-          });
-        }
-      }
-    }, 3000); // Change the interval duration as needed
-  };
-
-  const stopAutoScroll = () => {
-    clearInterval(intervalRef.current);
-  };
+  const slides = [
+    {
+      src: "/delivery_boy.png",
+      title: "Home Delivery",
+      description: "Delivery at your doorstep",
+    },
+    {
+      src: "/trolly.webp",
+      title: "Quick Service",
+      description: "Fast and reliable",
+    },
+    {
+      src: "/veg.png",
+      title: "Customer Satisfaction",
+      description: "Our top priority",
+    },
+  ];
 
   useEffect(() => {
-    startAutoScroll();
-    return () => stopAutoScroll();
-  }, []);
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000); // Change slide every 3 seconds
 
-  const handleMouseDown = (e) => {
-    stopAutoScroll();
-    const slider = carousel.current;
-    slider.isDown = true;
-    slider.classList.add("active");
-    slider.startX = e.pageX - slider.offsetLeft;
-    slider.scrollLeft = slider.scrollLeft;
-  };
-
-  const handleMouseLeave = () => {
-    const slider = carousel.current;
-    slider.isDown = false;
-    slider.classList.remove("active");
-    startAutoScroll();
-  };
-
-  const handleMouseUp = () => {
-    const slider = carousel.current;
-    slider.isDown = false;
-    slider.classList.remove("active");
-    startAutoScroll();
-  };
-
-  const handleMouseMove = (e) => {
-    const slider = carousel.current;
-    if (!slider.isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - slider.startX) * 3; //scroll-fast
-    slider.scrollLeft = slider.scrollLeft - walk;
-  };
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   return (
-    <div className="container mx-auto py-12">
-      <div
-        ref={carousel}
-        className="carousel flex overflow-x-auto scroll-snap-type-x-mandatory"
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-      >
-        <div className="carousel-item w-full relative flex-none scroll-snap-align-start">
-          <img
-            src="https://via.placeholder.com/800x400"
-            alt="Slide 1"
-            className="w-full h-96 object-cover"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
-            <h2 className="text-2xl">Slide 1 Title</h2>
-            <p className="text-lg">Description for slide 1.</p>
+    <div
+      id="default-carousel"
+      className="relative w-[90%] mx-auto  border-blue-500"
+    >
+      <div className="relative h-[80vh] flex overflow-hidden rounded-lg md:h-[80vh]">
+        <div className="w-1/2 flex items-center  justify-center">
+          <div className="text-left">
+            <p className="text-[2rem]  text-green-500  font-bold">
+              {slides[currentIndex].title}
+            </p>
+            <p className="text-[5rem]">{slides[currentIndex].description}</p>
           </div>
         </div>
-        <div className="carousel-item w-full relative flex-none scroll-snap-align-start">
-          <img
-            src="https://via.placeholder.com/800x400"
-            alt="Slide 2"
-            className="w-full h-96 object-cover"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
-            <h2 className="text-2xl">Slide 2 Title</h2>
-            <p className="text-lg">Description for slide 2.</p>
-          </div>
-        </div>
-        <div className="carousel-item w-full relative flex-none scroll-snap-align-start">
-          <img
-            src="https://via.placeholder.com/800x400"
-            alt="Slide 3"
-            className="w-full h-96 object-cover"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
-            <h2 className="text-2xl">Slide 3 Title</h2>
-            <p className="text-lg">Description for slide 3.</p>
-          </div>
+        <div className="w-1/2 flex items-center justify-center">
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className={`duration-200 ease-in-out absolute w-full h-full transition-opacity ${
+                index === currentIndex ? "opacity-100" : "opacity-0"
+              }`}
+              data-carousel-item
+            >
+              <img
+                src={slide.src}
+                className="absolute block  h-auto w-[30rem] max-h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt={`Slide ${index}`}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>
