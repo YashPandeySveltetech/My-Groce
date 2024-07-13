@@ -6,6 +6,9 @@ import "./globals.css";
 import Header from "@/components/header";
 import Sidebar from "@/components/sidebar";
 import {useEffect} from "react";
+import Footer from "@/components/footer";
+import RootModals from "@/components/modals";
+import ReduxProvider from "./ReduxProvider";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -20,23 +23,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className=" bg-white">
-        {false ? (
-          <div className="h-screen">{children}</div>
-        ) : (
-          <div className="flex">
-            {/* <Sidebar /> */}
-            <div className="w-full">
-              <Header />
-              <div className="w-full bg-white border rounded-lg">
-                {children}
+    <ReduxProvider>
+      <html lang="en">
+        <body className=" bg-white">
+          <RootModals />
+          {false ? (
+            <div className="h-screen">{children}</div>
+          ) : (
+            <div className="flex">
+              {/* <Sidebar /> */}
+              <div className="w-full">
+                <Header />
+                <div className="w-full bg-white border rounded-lg">
+                  {children}
+                </div>
+                <Footer />
               </div>
             </div>
-          </div>
-        )}
-      </body>
-    </html>
+          )}
+        </body>
+      </html>
+    </ReduxProvider>
   );
 }
 

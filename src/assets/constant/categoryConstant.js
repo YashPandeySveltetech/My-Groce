@@ -69,3 +69,33 @@ export const productCardItems = [
     image: "/aata.webp",
   },
 ];
+
+export const brands = [
+  {
+    title: "EVEREST",
+  },
+  {
+    title: "Nescafe",
+  },
+  {
+    title: "Bru",
+  },
+  {
+    title: "TATA",
+  },
+  {
+    title: "Brooke Bond",
+  },
+  {
+    title: "Wagh Bakri",
+  },
+  {
+    title: "Lipton",
+  },
+  {
+    title: "AMUL",
+  },
+  {
+    title: "Mother Dairy",
+  },
+];

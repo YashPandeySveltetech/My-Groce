@@ -1,8 +1,12 @@
+"use client";
 import React from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {decrement, increment} from "@/redux/counterSlice";
 
 const ProductCard = ({productDescription, price, image}) => {
+  const dispatch = useDispatch();
   return (
-    <div className="w-[300px] h-[400px] bg-white shadow-lg product-card">
+    <div className="w-[300px] h-[400px] bg-white mb-4 shadow-lg product-card">
       <div className="flex  flex-col ">
         <div className="w-full  flex justify-center items-center ">
           <img className="w-[250px] h-[200px]" src={image} />
@@ -64,6 +68,16 @@ const ProductCard = ({productDescription, price, image}) => {
         <div className="flex  flex-col gap-1 justify-center text-center">
           <p>{productDescription}</p>
           <p>{price}</p>
+        </div>
+        <div className="m-5">
+          <button
+            onClick={() => {
+              dispatch(increment()), console.log("click ho gya");
+            }}
+            className="w-full bg-green-500 text-white  py-2 rounded "
+          >
+            Add To Cart
+          </button>
         </div>
       </div>
     </div>

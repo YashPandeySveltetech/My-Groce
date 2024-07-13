@@ -1,9 +1,9 @@
 "use client";
 
 import React, {useState} from "react";
-import LoginForm from "@/components/forms/loginForm";
+import SignupForm from "@/components/forms/signupForm";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,7 +15,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-around p-10 min-h-screen  bg-white">
-      <LoginForm handleSubmit={handleSubmit} />
+      <SignupForm handleSubmit={handleSubmit} />
       <div>
         <img src="/login.webp" />
       </div>
@@ -23,4 +23,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
