@@ -23,7 +23,7 @@ function Sidebar() {
         
 	];
 	return (
-		<div className='w-56  h-[100vh] text-gray-300'>
+		<div className='w-56  h-[100vh] text-black-300'>
 			<div className='flex justify-center mt-10'>
 				<Image
 					alt=''

@@ -25,21 +25,28 @@ export default function RootLayout({
   return (
     <ReduxProvider>
       <html lang="en">
-        <body className=" bg-white">
+        <body className="bg-white">
           <RootModals />
           {false ? (
             <div className="h-screen">{children}</div>
           ) : (
             <div className="flex">
-              {/* <Sidebar /> */}
-              <div className="w-full">
-                <Header />
-                <div className="w-full bg-white border rounded-lg">
-                  {children}
-                </div>
-                <Footer />
-              </div>
-            </div>
+<Sidebar/>
+<div className="flex flex-col w-full">
+{/* <Header/> */}
+<div className=" border border-rounded" > {children}</div> </div>
+
+</div> 
+            // <div className="flex">
+            //   {/* <Sidebar /> */}
+            //   <div className="w-full">
+            //     <Header />
+            //     <div className="w-full bg-white border rounded-lg">
+            //       {children}
+            //     </div>
+            //     <Footer />
+            //   </div>
+            // </div>
           )}
         </body>
       </html>
