@@ -2,12 +2,13 @@
 
 import React from "react";
 
-export default function DropdownComponent({items, handleSelect}) {
+export default function DropdownComponent({items, handleSelect, name}) {
   return (
     <>
       <div>
         <select
           onChange={handleSelect}
+          name={name}
           className="p-[10px] border border-green-300 bg-white shadow-sm focus:outline-none focus:ring-2  focus:border-green-500"
         >
           <option value="" disabled selected>

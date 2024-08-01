@@ -56,6 +56,8 @@ function AddProductForm() {
   };
 
   const handleSubmit = async (e) => {
+    console.log(formData, "name={name}");
+    return;
     apiHandler(() => createProduct({...formData}), {
       onSuccess: (data) => {
         // setsubCategoryList(data?.data)/;
@@ -93,6 +95,7 @@ function AddProductForm() {
   //   };
 
   useEffect(() => {
+    console.log("asdasd");
     if (formData?.category) {
       fetchSubCategoryList();
     }
@@ -115,6 +118,10 @@ function AddProductForm() {
     console.log(e.target.name, "handleSelect");
     const {name} = e.target;
     setFormData({...formData, [name]: e.target.value});
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({...formData, images: e.target.files[0]});
   };
 
   return (
@@ -181,7 +188,7 @@ function AddProductForm() {
             value={formData.image}
             title="Product Image"
             placeholder="Enter Product Image"
-            onChange={handleChange}
+            onChange={handleFileChange}
           />
         </div>
         <button
