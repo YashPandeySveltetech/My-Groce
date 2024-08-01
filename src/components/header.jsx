@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, {useState, useRef, useCallback} from "react";
+import React, {useState, useRef, useCallback, useEffect} from "react";
 import ChatMessager from "@/components/chatMessagerAi";
 import DropdownComponent from "@/components/commonComponents/dropdown";
 import Button from "@/components/commonComponents/button";
@@ -13,13 +13,16 @@ import MultiLevelDropdown from "@/components/commonComponents/MultiLevelDropdown
 import {menuItems} from "@/assets/constant/categoryConstant";
 import {useSelector, useDispatch} from "react-redux";
 import {decrement, increment} from "@/redux/counterSlice";
+import {apiHandler} from "@/services/axios";
+import {getCotegoryList} from "@/services/categoryServices";
+import {setCategoryList} from "@/redux/categorySlice";
 
 function Header() {
   const {value} = useSelector((state) => state.counterSlice);
   // console.log(count, "counter")/;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const timeoutRef = useRef(null);
-
+  const dispatch = useDispatch();
   const handleMouseEnter = useCallback(() => {
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
@@ -32,6 +35,24 @@ function Header() {
     timeoutRef.current = setTimeout(() => {
       setIsModalOpen(false);
     }, 300); // 300ms delay before closing
+  }, []);
+
+  const getcategory = async () => {
+    apiHandler(() => getCotegoryList(""), {
+      onSuccess: (data) => {
+        console.log(data, "data");
+        dispatch(setCategoryList(data?.data));
+      },
+      onError: (e) => {
+        // Your error handling logic here
+      },
+      final: () => {
+        // Your final logic here
+      },
+    });
+  };
+  useEffect(() => {
+    getcategory();
   }, []);
 
   return (

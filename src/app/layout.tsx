@@ -31,12 +31,12 @@ export default function RootLayout({
             <div className="h-screen">{children}</div>
           ) : (
             <div className="flex">
-<Sidebar/>
-<div className="flex flex-col w-full">
-{/* <Header/> */}
-<div className=" border border-rounded" > {children}</div> </div>
-
-</div> 
+              <Sidebar />
+              <div className="flex flex-col w-full">
+                <Header />
+                <div className=" border border-rounded"> {children}</div>{" "}
+              </div>
+            </div>
             // <div className="flex">
             //   {/* <Sidebar /> */}
             //   <div className="w-full">

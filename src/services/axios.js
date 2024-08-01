@@ -4,7 +4,7 @@ import Axios from "axios";
 // import { STORAGES } from "constants/appConstants";
 
 // let BASE_URL = "http://localhost:5000/api/V1";
-let BASE_URL="http://localhost:2000"
+let BASE_URL = "http://192.168.15.226:2000";
 // let BASE_URL = getConfig().apiBaseUrl;
 
 // if (process?.env?.NODE_ENV === "production") {
@@ -13,15 +13,13 @@ let BASE_URL="http://localhost:2000"
 
 const CancelToken = Axios.CancelToken;
 
-export default function getAxiosInst(
-  { withAuth, headers } = { withAuth: false }
-) {
+export default function getAxiosInst({withAuth, headers} = {withAuth: false}) {
   const token = "getLocalStorageItem(STORAGES.token)";
 
   if (withAuth) {
     return Axios.create({
       baseURL: BASE_URL,
-      headers: { Authorization: `Bearer ${token}`, ...headers },
+      headers: {Authorization: `Bearer ${token}`, ...headers},
     });
   } else {
     return Axios.create({
@@ -33,8 +31,8 @@ export default function getAxiosInst(
 
 export const apiHandler = async (
   apiCall,
-  { onSuccess, onError, final, onCancel } = {},
-  options = { sync: false, shouldReturn: false }
+  {onSuccess, onError, final, onCancel} = {},
+  options = {sync: false, shouldReturn: false}
 ) => {
   let response;
   try {
@@ -71,7 +69,7 @@ export const apiHandler = async (
       }
       onError && onError(error, response, options);
     }
-    if (options.shouldReturn) return Promise.reject({ ...error, options });
+    if (options.shouldReturn) return Promise.reject({...error, options});
   } finally {
     final && final(options);
   }
