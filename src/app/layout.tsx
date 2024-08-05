@@ -33,8 +33,8 @@ export default function RootLayout({
             <div className="flex">
 <Sidebar/>
 <div className="flex flex-col w-full">
-{/* <Header/> */}
-<div className=" border border-rounded" > {children}</div> </div>
+<Header/>
+<div className=" border bg-white border-rounded" > {children}</div> </div>
 
 </div> 
             // <div className="flex">

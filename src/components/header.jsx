@@ -1,42 +1,44 @@
-"use client";
-import Image from "next/image";
-import React, {useState, useRef, useCallback} from "react";
-import ChatMessager from "@/components/chatMessagerAi";
-import DropdownComponent from "@/components/commonComponents/dropdown";
-import Button from "@/components/commonComponents/button";
-import Refresh from "@/assets/refresh";
-import HeartIcon from "@/assets/heartIcon";
-import BagIcon from "@/assets/bagIcon";
-import UserIcon from "@/assets/userIcon";
-import Slider from "@/components/slider";
-import MultiLevelDropdown from "@/components/commonComponents/MultiLevelDropdown";
-import {menuItems} from "@/assets/constant/categoryConstant";
-import {useSelector, useDispatch} from "react-redux";
-import {decrement, increment} from "@/redux/counterSlice";
+/** @format */
+
+'use client';
+import Image from 'next/image';
+import React, { useState, useRef, useCallback } from 'react';
+import ChatMessager from '@/components/chatMessagerAi';
+import DropdownComponent from '@/components/commonComponents/dropdown';
+import Button from '@/components/commonComponents/button';
+import Refresh from '@/assets/refresh';
+import HeartIcon from '@/assets/heartIcon';
+import BagIcon from '@/assets/bagIcon';
+import UserIcon from '@/assets/userIcon';
+import Slider from '@/components/slider';
+import MultiLevelDropdown from '@/components/commonComponents/MultiLevelDropdown';
+import { menuItems } from '@/assets/constant/categoryConstant';
+import { useSelector, useDispatch } from 'react-redux';
+import { decrement, increment } from '@/redux/counterSlice';
 
 function Header() {
-  const {value} = useSelector((state) => state.counterSlice);
-  // console.log(count, "counter")/;
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const timeoutRef = useRef(null);
+	const { value } = useSelector((state) => state.counterSlice);
+	// console.log(count, "counter")/;
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const timeoutRef = useRef(null);
 
-  const handleMouseEnter = useCallback(() => {
-    clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setIsModalOpen(true);
-    }, 200); // 200ms delay before opening
-  }, []);
+	const handleMouseEnter = useCallback(() => {
+		clearTimeout(timeoutRef.current);
+		timeoutRef.current = setTimeout(() => {
+			setIsModalOpen(true);
+		}, 200); // 200ms delay before opening
+	}, []);
 
-  const handleMouseLeave = useCallback(() => {
-    clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setIsModalOpen(false);
-    }, 300); // 300ms delay before closing
-  }, []);
+	const handleMouseLeave = useCallback(() => {
+		clearTimeout(timeoutRef.current);
+		timeoutRef.current = setTimeout(() => {
+			setIsModalOpen(false);
+		}, 300); // 300ms delay before closing
+	}, []);
 
-  return (
-    <>
-      <div className="flex justify-around items-center w-full py-[3rem] px-[15rem]">
+	return (
+		<>
+			{/* <div className="flex justify-around items-center w-full py-[3rem] px-[15rem]">
         <Image
           alt=""
           className="w-[153px] h-[44px]"
@@ -59,7 +61,6 @@ function Header() {
           />
         </div>
         <div className="flex justify-center gap-4">
-          {/* <Refresh/> */}
 
           <button
             type="button"
@@ -118,22 +119,19 @@ function Header() {
             </div>
           </button>
         </div>
-      </div>
-      {/* <div className="flex justify-between w-full h-[70px] items-center bg-green-400">
-        <div className="w-70 px-10 ">
-          HELLO
-          <MultiLevelDropdown />
-        </div>
-        <div className="w-30 px-10 ">
-          <button className="p-3 w-[200px] rounded-md bg-orange-400 text-black">
-            Seller Login
-          </button>
-        </div>
       </div> */}
+			<div className='flex justify-between w-full h-[70px] items-center'>
+				<div className='w-70 px-10 '>HELLO</div>
+				<div className='w-30 px-10 '>
+					<button className='p-3 w-[200px] rounded-md bg-orange-400 text-black'>
+						Seller Login
+					</button>
+				</div>
+			</div>
 
-      {/* <ChatMessager/> */}
-    </>
-  );
+			<ChatMessager />
+		</>
+	);
 }
 
 export default Header;
