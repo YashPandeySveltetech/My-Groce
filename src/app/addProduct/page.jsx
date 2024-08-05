@@ -19,7 +19,7 @@ function AddProductForm() {
     desc: "",
     price: "",
     type: "",
-    image: "",
+    images: "",
 
     category: "",
     subCategory: "",
@@ -56,9 +56,23 @@ function AddProductForm() {
   };
 
   const handleSubmit = async (e) => {
-    console.log(formData, "name={name}");
-    return;
-    apiHandler(() => createProduct({...formData}), {
+    // console.log(formData, "name={name}");
+    let newFormData = new FormData();
+    newFormData.append("images", formData.images);
+    newFormData.append("productName", formData.productName);
+    newFormData.append("category", formData.category);
+    newFormData.append("desc", formData.desc);
+    newFormData.append("price", formData.price);
+    newFormData.append("subCategory", formData.subCategory);
+    newFormData.append("type", formData.type);
+
+    // Properly log the contents of the FormData
+    for (let [key, value] of newFormData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
+    // return;
+    apiHandler(() => createProduct({data: newFormData}), {
       onSuccess: (data) => {
         // setsubCategoryList(data?.data)/;
         // setcategoryList(data?.data);
